@@ -11,10 +11,11 @@
     <li>{{ product.name }}: <span>{{ product.price }}</span></li>
     {% endfor %}
 
-    <h2>Sales: <span>{{ sales.last.date }}</span></h2>
+    <!-- <h2>Sales: <span>{{ sales.last.date }}</span></h2>
+
     {% for sale in sales %}
     <li>{{ sale.product_id.name }}: <span>{{ sale.quantity }}</span></li>
-    {% endfor %}
+    {% endfor %} -->
 
     <h2>Total de Ventas por Día:</h2>
     <ul>
