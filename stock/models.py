@@ -23,3 +23,8 @@ class Inventories_sales(models.Model):
     inventory_sales_id = models.IntegerField(primary_key=True)
     inventory_id = models.ForeignKey('Inventories', on_delete=models.CASCADE)
     sale_id = models.ForeignKey('Sales', on_delete=models.CASCADE)
+
+# models.py
+
+
+

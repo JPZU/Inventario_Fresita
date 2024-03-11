@@ -2,7 +2,8 @@ from django.urls import path
 
 from . import views
 
-# app_name = 'stock'
+app_name = 'stock'
 urlpatterns = [
     path("", views.index, name="index"),
+    path("sales/<str:date>/", views.salesDate, name="salesDate"),
 ]
