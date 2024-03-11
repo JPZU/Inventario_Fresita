@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresita</title>
+  </head>
+  <body>
+    <h1>Productos</h1>
+    {% for product in products %}
+    <li>{{ product.name }}: <span>{{ product.price }}</span></li>
+    {% endfor %}
+
+    <h2>Sales: <span>{{ sales.last.date }}</span></h2>
+    {% for sale in sales %}
+    <li>{{ sale.product_id.name }}: <span>{{ sale.quantity }}</span></li>
+    {% endfor %}
+
+    <h2>Total de Ventas por Día:</h2>
+    <ul>
+      {% for date, total_sales in total_sales_by_date.items %}
+      <li>{{ date }}: <span>{{ total_sales }}</span></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
