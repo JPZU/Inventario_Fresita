@@ -4,19 +4,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
     <title>Fresita</title>
   </head>
   <body>
-    <h1>Ventas para la fecha {{ date }}</h1>
-    <ul>
-      {% for sale in sales %}
-      <li>{{ sale.product_id.name }}: <span>{{ sale.quantity }}</span></li>
-      {% endfor %}
-    </ul>
-    <h2>Cantidad total: <span>{{total_sold_in_day}}</span></h2>
-    {% for date, total_sales in total_sales_by_date.items %}
-    <h2>Venta total: <span>{{ total_sales }}</span></h2>
+    <h1>Sales</h1>
+    <div class="sale">
+      <h2>By date: {{date}}</h2>
+      <table>
+        <tr>
+          <th>products</th>
+          <th>quantity</th>
+        </tr>
+        {% for sale in sales %}
+        <tr>
+          <td>{{sale.product_id.name}}</td>
+          <td>{{sale.quantity}}</td>
+        </tr>
+        {% endfor%}
+      </table>
 
-    {% endfor %}
+      <h2>Cantidad total: <span>{{total_sold_in_day}}</span></h2>
+      {% for date, total_sales in total_sales_by_date.items %}
+      <h2>Venta total: <span>{{ total_sales }}</span></h2>
+
+      {% endfor %}
+    </div>
   </body>
 </html>
