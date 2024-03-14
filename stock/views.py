@@ -33,7 +33,15 @@ def index(request):
 
 
 def enterSales(request):
-    return render(request, "stock/enterSales.html")
+    products = Products.objects.all()
+    
+    if request.method == "POST":
+        print(request.POST['product'])
+    # pdb.set_trace()
+    context = {
+        'products':products,
+    }
+    return render(request, "stock/enterSales.html", context)
 
 
 def enterStock(request):
