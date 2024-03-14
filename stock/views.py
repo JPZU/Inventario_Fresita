@@ -32,8 +32,20 @@ def index(request):
     return render(request, "stock/index.html", context)
 
 
-def salesDate(request, date):
-    sales = Sales.objects.filter(date=date)
+def enterSales(request):
+    return render(request, "stock/enterSales.html")
+
+
+def enterStock(request):
+    return render(request, "stock/enterStock.html")
+
+
+def salesHistory(request):
+    searchTerm = request.GET.get('searchDate')
+    
+    sales = Sales.objects.filter(date=searchTerm)
+    last_date = Sales.objects.latest('date')
+    last_date = last_date.date
     
     # Calcular el total vendido en el día
     total_sold_in_day = sales.aggregate(total_sold=Sum('quantity'))['total_sold'] or 0
@@ -49,23 +61,12 @@ def salesDate(request, date):
 
     # pdb.set_trace()
     context = {
-        'date': date,
+        'last_date':last_date ,
         'sales': sales,
         'total_sold_in_day': total_sold_in_day,
         'total_sales_by_date': total_sales_by_date,
     }
-    return render(request, "stock/salesDate.html", context)
-
-def enterSales(request):
-    return render(request, "stock/enterSales.html")
-
-
-def enterStock(request):
-    return render(request, "stock/enterStock.html")
-
-
-def salesHistory(request):
-    return render(request, "stock/salesHistory.html")
+    return render(request, "stock/salesHistory.html", context)
 
 def stadistics(request):
     return render(request, "stock/stadis.html")

@@ -1,3 +1,30 @@
 {% extends 'base.html'%} {% block content %}
-<h1>from sales history</h1>
+<h1>Sales History</h1>
+<div class="sale">
+  <form action="">
+    <div class="sale-btn">
+      <label for="searchDate">Searching By Date:</label>
+      <input type="date" name="searchDate" />
+      <button type="submit">Search</button>
+    </div>
+  </form>
+  <table>
+    <tr>
+      <th>products</th>
+      <th>quantity</th>
+    </tr>
+    {% for sale in sales %}
+    <tr>
+      <td>{{sale.product_id.name}}</td>
+      <td>{{sale.quantity}}</td>
+    </tr>
+    {% endfor%}
+  </table>
+
+  {% for date, total_sales in total_sales_by_date.items %}
+  <h2>Quantity total: <span>{{total_sold_in_day}}</span></h2>
+  <h2>Revenue: <span>${{ total_sales }}</span></h2>
+
+  {% endfor %}
+</div>
 {% endblock content%}
