@@ -55,3 +55,17 @@ def salesDate(request, date):
         'total_sales_by_date': total_sales_by_date,
     }
     return render(request, "stock/salesDate.html", context)
+
+def enterSales(request):
+    return render(request, "stock/enterSales.html")
+
+
+def enterStock(request):
+    return render(request, "stock/enterStock.html")
+
+
+def salesHistory(request):
+    return render(request, "stock/salesHistory.html")
+
+def stadistics(request):
+    return render(request, "stock/stadis.html")

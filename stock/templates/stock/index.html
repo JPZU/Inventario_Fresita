@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../static/css/style.css" />
-    <title>Fresita</title>
-  </head>
-  <body>
-    <div class="general-information">
-      <h1>General information</h1>
-      <table>
-        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Unit price</th>
-          <th>Quantity available</th>
-        </tr>
-        {% for product, quantity in sold_quantity_per_product.items %}
-        <tr>
-          <td>{{ product.product_id }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ quantity }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      <h2>
-        Total value inventory:
-        <span>${{total_value_per_product}}</span>
-      </h2>
-    </div>
-  </body>
-</html>
+{% extends 'base.html'%} {% block content %}
+<div class="general-information">
+  <h1>General information</h1>
+  <table>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Unit price</th>
+      <th>Quantity available</th>
+    </tr>
+    {% for product, quantity in sold_quantity_per_product.items %}
+    <tr>
+      <td>{{ product.product_id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ quantity }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <h2>
+    Total value inventory:
+    <span>${{total_value_per_product}}</span>
+  </h2>
+</div>
+{% endblock content%}

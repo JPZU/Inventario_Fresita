@@ -1,34 +1,24 @@
-<!-- templates/stock/ventas_por_fecha.html -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../static/css/style.css" />
-    <title>Fresita</title>
-  </head>
-  <body>
-    <h1>Sales</h1>
-    <div class="sale">
-      <h2>By date: {{date}}</h2>
-      <table>
-        <tr>
-          <th>products</th>
-          <th>quantity</th>
-        </tr>
-        {% for sale in sales %}
-        <tr>
-          <td>{{sale.product_id.name}}</td>
-          <td>{{sale.quantity}}</td>
-        </tr>
-        {% endfor%}
-      </table>
+{% extends 'base.html'%} {% block content %}
+<h1>Sales</h1>
+<div class="sale">
+  <h2>By date: {{date}}</h2>
+  <table>
+    <tr>
+      <th>products</th>
+      <th>quantity</th>
+    </tr>
+    {% for sale in sales %}
+    <tr>
+      <td>{{sale.product_id.name}}</td>
+      <td>{{sale.quantity}}</td>
+    </tr>
+    {% endfor%}
+  </table>
 
-      <h2>Cantidad total: <span>{{total_sold_in_day}}</span></h2>
-      {% for date, total_sales in total_sales_by_date.items %}
-      <h2>Venta total: <span>{{ total_sales }}</span></h2>
+  <h2>Cantidad total: <span>{{total_sold_in_day}}</span></h2>
+  {% for date, total_sales in total_sales_by_date.items %}
+  <h2>Venta total: <span>{{ total_sales }}</span></h2>
 
-      {% endfor %}
-    </div>
-  </body>
-</html>
+  {% endfor %}
+</div>
+{% endblock content%}

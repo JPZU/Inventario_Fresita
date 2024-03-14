@@ -1,0 +1,26 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Fresita</title>
+</head>
+<body>
+  <div class="menu">
+    <nav>
+      <ul>
+        <li><a href="/">General information</a></li>
+        <li><a href="/enterSales">Enter sales</a></li>
+        <li><a href="/enterStock">Enter Stock</a></li>
+        <li><a href="/salesHistory">Sales history</a></li>
+        <li><a href="/stadistics">stadistics</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">{% block content %} {% endblock content%}</div>
+
+  <footer class="footer">
+    <div class="container-footer">
+      <h4>© 2024 Copytight - Juan Pablo Zuluaga</h4>
+    </div>
+  </footer>
+</body>
