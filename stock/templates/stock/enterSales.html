@@ -1,7 +1,25 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>Enter sales</h1>
 <form action="" method="post">
-  {% csrf_token %} {{ formset}}
+  {% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Product</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form in formset %}
+      <tr>
+        <td>{{ form.date }}</td>
+        <td>{{ form.product_id }}</td>
+        <td>{{ form.quantity }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
   <input type="submit" value="Submit" />
 </form>
-{% endblock content%}
+{% endblock %}

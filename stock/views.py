@@ -34,24 +34,33 @@ def index(request):
     return render(request, "stock/index.html", context)
 
 
-def enterSales(request):
 
-    productsFormSet = modelformset_factory(Products, fields=['product_id', 'name', 'price'])  
-    queryset = Products.objects.filter(name__startswith='T')
+
+def enterSales(request):
+    salesFormSet = modelformset_factory(
+        Sales,
+        fields=['date', 'product_id', 'quantity']
+    )
+
     if request.method == "POST":
-        formset = productsFormSet(request.POST, request.FILES,queryset=queryset)
+        formset = salesFormSet(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
-            # do something.
+            # Hacer algo.
+            # return HttpResponseRedirect(('stock/index.html'))
     else:
-        formset = productsFormSet(queryset=queryset)  
-        
-        
-    # # pdb.set_trace()
+        formset = salesFormSet()
+
+    # Personalizar los widgets para mostrar el nombre del producto
+    for form in formset:
+        form.fields['product_id'].queryset = Products.objects.all()
+        form.fields['product_id'].label_from_instance = lambda obj: obj.name
+
     context = {
-        'formset':formset,
+        'formset': formset,
     }
-    return render(request, "stock/enterSales.html", context )
+    return render(request, "stock/enterSales.html", context)
+
 
 
 def enterStock(request):
