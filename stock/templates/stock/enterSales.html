@@ -1,17 +1,7 @@
 {% extends 'base.html'%} {% block content %}
-<h1>from Enter sales</h1>
-<div>
-  <form action="" method="post">
-    {%csrf_token%}
-    <label for="date">From date:</label>
-    <input type="date" name="date" required />
-    {% for product in products %}
-    <div class="quantity">
-      <label for="product">{{ product.name }}:</label>
-      <input type="number" name="product" required />
-    </div>
-    {% endfor %}
-    <button type="submit">submit sale</button>
-  </form>
-</div>
+<h1>Enter sales</h1>
+<form action="" method="post">
+  {% csrf_token %} {{ form }}
+  <input type="submit" value="Submit" />
+</form>
 {% endblock content%}

@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Sum
 from .models import Sales,Products, Inventories,Inventories_sales
 import pdb
+from .forms import ProductsForm
 
 
 def index(request):
@@ -33,15 +34,27 @@ def index(request):
 
 
 def enterSales(request):
-    products = Products.objects.all()
+    form = ProductsForm
+
     
     if request.method == "POST":
-        print(request.POST['product'])
-    # pdb.set_trace()
+        # create a form instance and populate it with data from the request:
+        form = ProductsForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            price = form.cleaned_data["price"]
+            return HttpResponseRedirect("/enterSales/")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProductsForm()
+        
+    # # pdb.set_trace()
     context = {
-        'products':products,
+        'form':form,
     }
-    return render(request, "stock/enterSales.html", context)
+    return render(request, "stock/enterSales.html", context )
 
 
 def enterStock(request):
@@ -77,4 +90,4 @@ def salesHistory(request):
     return render(request, "stock/salesHistory.html", context)
 
 def stadistics(request):
-    return render(request, "stock/stadis.html")
+    return render(request, "stock/stadistics.html")
