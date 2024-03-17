@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Sum
 from .models import Sales,Products, Inventories,Inventories_sales
 import pdb
-from .forms import ProductsForm
+# from .forms import ProductsForm
+from django.forms import modelformset_factory
 
 
 def index(request):
@@ -34,25 +35,21 @@ def index(request):
 
 
 def enterSales(request):
-    form = ProductsForm
 
-    
+    productsFormSet = modelformset_factory(Products, fields=['product_id', 'name', 'price'])  
+    queryset = Products.objects.filter(name__startswith='T')
     if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = ProductsForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            name = form.cleaned_data["name"]
-            price = form.cleaned_data["price"]
-            return HttpResponseRedirect("/enterSales/")
-
-    # if a GET (or any other method) we'll create a blank form
+        formset = productsFormSet(request.POST, request.FILES,queryset=queryset)
+        if formset.is_valid():
+            formset.save()
+            # do something.
     else:
-        form = ProductsForm()
+        formset = productsFormSet(queryset=queryset)  
+        
         
     # # pdb.set_trace()
     context = {
-        'form':form,
+        'formset':formset,
     }
     return render(request, "stock/enterSales.html", context )
 
