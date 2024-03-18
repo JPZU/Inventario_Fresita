@@ -11,6 +11,17 @@ class Sales(models.Model):
     date = models.DateField(null=False)
     product_id = models.ForeignKey('Products', on_delete=models.CASCADE, null=False)
     quantity = models.SmallIntegerField(null=False)
+
+    def __init__(self, *args, **kwargs):
+        super(Sales, self).__init__(*args, **kwargs)
+
+    @classmethod
+    def create(cls, date, product_id, quantity):
+        sale = cls(date=date, product_id=product_id, quantity=quantity)
+        return sale
+
+    def __str__(self):
+        return f"Sale ID: {self.sale_id}, Date: {self.date}, Product ID: {self.product_id}, Quantity: {self.quantity}"
     
 class Inventories(models.Model):
     inventory_id = models.AutoField(primary_key=True)

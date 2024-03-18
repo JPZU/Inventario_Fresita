@@ -1,9 +1,9 @@
-# from django import ModelForm
-# from .models import Products
+from django import forms
+from .models import *
 
-   
-# class ProductsForm(ModelForm):
-#     class Meta:
-#         model = Products
-#         fields = ['__all__']
+class SalesForm(forms.ModelForm):
+    product_id = forms.ModelChoiceField(queryset=Products.objects.all(), to_field_name="name")
+    class Meta:
+        model = Sales
+        fields = ['date', 'product_id', 'quantity']
     

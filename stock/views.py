@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Sum
 from .models import Sales,Products, Inventories,Inventories_sales
+from .forms import *
 import pdb
-# from .forms import ProductsForm
-from django.forms import modelformset_factory
+
 
 
 def index(request):
@@ -37,27 +37,12 @@ def index(request):
 
 
 def enterSales(request):
-    salesFormSet = modelformset_factory(
-        Sales,
-        fields=['date', 'product_id', 'quantity']
-    )
-
-    if request.method == "POST":
-        formset = salesFormSet(request.POST, request.FILES)
-        if formset.is_valid():
-            formset.save()
-            # Hacer algo.
-            # return HttpResponseRedirect(('stock/index.html'))
-    else:
-        formset = salesFormSet()
-
-    # Personalizar los widgets para mostrar el nombre del producto
-    for form in formset:
-        form.fields['product_id'].queryset = Products.objects.all()
-        form.fields['product_id'].label_from_instance = lambda obj: obj.name
-
+    form = SalesForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        # return redirect('/')
     context = {
-        'formset': formset,
+        'form': form,
     }
     return render(request, "stock/enterSales.html", context)
 
