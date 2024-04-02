@@ -5,6 +5,12 @@ class Products(models.Model):
     product_id = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=20, null=False)
     price = models.IntegerField(null=False)
+
+    def __init__(self, product_id=None, name=None, price=None, *args, **kwargs):
+        super(Products, self).__init__(*args, **kwargs)
+        self.product_id = product_id
+        self.name = name
+        self.price = price
     
 class Sales(models.Model):
     sale_id = models.AutoField(primary_key=True)
